@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) { }
+    })();
+  </script>
+
+  <title>Boris Khesin — Economics &amp; Computer Science, Grinnell College</title>
+  <meta name="description"
+    content="Boris Khesin is an Economics &amp; Computer Science student at Grinnell College (Class of 2028), building software across web, mobile, and applied econometric research.">
+  <meta name="author" content="Boris Khesin">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://khesin.net/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://khesin.net/">
+  <meta property="og:title" content="Boris Khesin">
+  <meta property="og:description"
+    content="Economics & Computer Science student at Grinnell College — projects, research, and experience.">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Boris Khesin">
+  <meta name="twitter:description"
+    content="Economics & Computer Science student at Grinnell College — projects, research, and experience.">
+
+  <meta name="theme-color" content="#f7f4ee" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1a1611" media="(prefers-color-scheme: dark)">
+
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23f7f4ee'/%3E%3Ctext x='32' y='43' font-family='Georgia, serif' font-size='30' font-weight='600' fill='%2301411c' text-anchor='middle'%3EBK%3C/text%3E%3C/svg%3E">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Boris Khesin",
+  "url": "https://khesin.net/",
+  "email": "mailto:boris@khesin.net",
+  "sameAs": [
+    "https://github.com/Shagulka",
+    "https://www.linkedin.com/in/boris-khesin/"
+  ],
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "Grinnell College"
+  },
+  "description": "Economics & Computer Science student at Grinnell College, Class of 2028."
+}
+</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --max: 760px;
+      --topbar-h: 3.2rem;
+    }
+
+    :root[data-theme="light"] {
+      --bg: #f7f4ee;
+      --bg-rgb: 247, 244, 238;
+      --ink: #241f18;
+      --ink-soft: #6b6353;
+      --accent: #01411c;
+      --rule: #ddd3bf;
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #1a1611;
+      --bg-rgb: 26, 22, 17;
+      --ink: #ece5d6;
+      --ink-soft: #a89d87;
+      --accent: #6dc798;
+      --rule: #3a3225;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+      font-size: 18.5px;
+      line-height: 1.7;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+      text-underline-offset: 3px;
+    }
+
+    a:hover {
+      text-decoration-thickness: 2px;
+    }
+
+    /* ---------- Top bar ---------- */
+
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 30;
+      background: rgba(var(--bg-rgb), 0.86);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule);
+      box-shadow: 0 10px 24px -18px rgba(0, 0, 0, 0.4);
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.35s ease, opacity 0.3s ease;
+    }
+
+    .topbar.visible {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .topbar-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0.6rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.4rem 1.3rem;
+      min-height: var(--topbar-h);
+    }
+
+    .wordmark {
+      font-weight: 700;
+      font-size: 0.96rem;
+      color: var(--ink);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .top-nav {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .top-nav a {
+      color: var(--ink-soft);
+      text-decoration: none;
+      font-variant: small-caps;
+      letter-spacing: 0.5px;
+      font-size: 0.92rem;
+    }
+
+    .top-nav a:hover,
+    .top-nav a.active {
+      color: var(--accent);
+    }
+
+    .top-nav a.active {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .top-contact {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      font-size: 0.88rem;
+      flex-wrap: wrap;
+    }
+
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      width: 2rem;
+      height: 2rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-soft);
+      cursor: pointer;
+      padding: 0;
+      flex-shrink: 0;
+    }
+
+    .theme-toggle:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .icon-sun,
+    .icon-moon {
+      display: none;
+    }
+
+    :root[data-theme="dark"] .icon-sun {
+      display: inline-flex;
+    }
+
+    :root[data-theme="light"] .icon-moon {
+      display: inline-flex;
+    }
+
+    /* ---------- Page ---------- */
+
+    .page {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 3.2rem 1.5rem 4rem;
+    }
+
+    .hero {
+      margin-bottom: 4rem;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 6vw, 3rem);
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      margin: 0 0 0.35rem;
+    }
+
+    .tagline {
+      font-style: italic;
+      color: var(--ink-soft);
+      font-size: 1.12rem;
+      margin: 0 0 1.6rem;
+    }
+
+    .bio {
+      margin: 0;
+      max-width: 58ch;
+    }
+
+    .bio::first-letter {
+      font-size: 3.2rem;
+      line-height: 0.7;
+      float: left;
+      padding: 0.1rem 0.15em 0 0;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .hero-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem 1.15rem;
+      margin: 2.1rem 0 1.1rem;
+    }
+
+    .hero-nav a {
+      color: var(--ink-soft);
+      text-decoration: none;
+      font-variant: small-caps;
+      letter-spacing: 0.5px;
+      font-size: 1.02rem;
+    }
+
+    .hero-nav a:hover {
+      color: var(--accent);
+    }
+
+    .hero-contact {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.9rem;
+      font-size: 1.02rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-contact .sep {
+      color: var(--rule);
+    }
+
+    .email-line {
+      font-size: 1.02rem;
+      margin: 0;
+    }
+
+    .email-line .cat {
+      color: var(--ink-soft);
+      font-style: italic;
+      margin-right: 0.3rem;
+    }
+
+    .email-line a {
+      font-weight: 700;
+    }
+
+    /* ---------- Section grid (margin-label layout) ---------- */
+
+    section.section,
+    footer.site-footer {
+      scroll-margin-top: calc(var(--topbar-h) + 1.2rem);
+      margin-bottom: 3.6rem;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 0.5rem 2.2rem;
+    }
+
+    .section-label {
+      font-variant: small-caps;
+      font-style: italic;
+      font-weight: 700;
+      letter-spacing: 1px;
+      font-size: 1.05rem;
+      color: var(--ink-soft);
+      margin: 0;
+      padding-top: 0.1rem;
+    }
+
+    @media (max-width: 700px) {
+      .section-grid {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+      }
+
+      .section-label {
+        padding-top: 0;
+        margin-bottom: 0.3rem;
+        border-bottom: 1px solid var(--rule);
+        padding-bottom: 0.5rem;
+      }
+    }
+
+    /* ---------- Timeline (experience / education) ---------- */
+
+    .entry {
+      padding: 1.05rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .entry:last-child {
+      border-bottom: none;
+    }
+
+    .entry-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .entry-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .entry-org {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--ink-soft);
+    }
+
+    .entry-date {
+      color: var(--ink-soft);
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+
+    .entry-tags {
+      font-variant: small-caps;
+      letter-spacing: 0.5px;
+      font-size: 0.86rem;
+      color: var(--accent);
+      margin: 0.35rem 0 0.4rem;
+    }
+
+    .entry-desc {
+      margin: 0.3rem 0 0;
+      color: var(--ink);
+      font-size: 0.96rem;
+      max-width: 62ch;
+    }
+
+    .entry-minor {
+      opacity: 0.72;
+      padding: 0.8rem 0;
+    }
+
+    .entry-minor .entry-title {
+      font-weight: 700;
+      font-size: 0.98rem;
+    }
+
+    .entry-minor .entry-desc {
+      font-size: 0.86rem;
+    }
+
+    .also-label {
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      margin: 1.2rem 0 -0.3rem;
+    }
+
+    /* ---------- Projects ---------- */
+
+    .project {
+      padding: 1.3rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .project:last-child {
+      border-bottom: none;
+    }
+
+    .project-title {
+      font-weight: 700;
+      font-size: 1.12rem;
+      margin: 0 0 0.15rem;
+    }
+
+    .project-stack {
+      display: block;
+      font-variant: small-caps;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      color: var(--ink-soft);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-desc {
+      margin: 0 0 0.5rem;
+      max-width: 62ch;
+    }
+
+    .project-link {
+      font-size: 0.95rem;
+    }
+
+    /* ---------- Research ---------- */
+
+    .paper {
+      padding: 1.3rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .paper:last-child {
+      border-bottom: none;
+    }
+
+    .paper-title {
+      font-weight: 700;
+      font-style: italic;
+      font-size: 1.08rem;
+      margin: 0 0 0.2rem;
+    }
+
+    .paper-meta {
+      font-size: 0.86rem;
+      color: var(--ink-soft);
+      margin-bottom: 0.5rem;
+    }
+
+    .paper-desc {
+      margin: 0 0 0.5rem;
+      max-width: 62ch;
+    }
+
+    /* ---------- Skills ---------- */
+
+    .skills-list {
+      color: var(--ink);
+      max-width: 62ch;
+      margin: 0;
+    }
+
+    .skills-list .cat {
+      color: var(--ink-soft);
+      font-style: italic;
+    }
+
+    /* ---------- Footer ---------- */
+
+    footer.site-footer {
+      text-align: center;
+      border-top: 1px solid var(--rule);
+      padding-top: 2rem;
+      margin-bottom: 0;
+    }
+
+    footer.site-footer .fineprint {
+      color: var(--ink-soft);
+      font-size: 0.85rem;
+      margin: 0 0 0.6rem;
+    }
+
+    footer.site-footer .back-to-top {
+      font-variant: small-caps;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        font-size: 17px;
+      }
+
+      .page {
+        padding: 2.4rem 1.25rem 3rem;
+      }
+
+      .entry-head {
+        flex-direction: column;
+        gap: 0.15rem;
+      }
+
+      .top-contact {
+        gap: 0.8rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="wordmark" href="#top">Boris Khesin</a>
+      <nav class="top-nav">
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#research">Research</a>
+        <a href="#education">Education</a>
+      </nav>
+      <div class="top-contact">
+        <a href="Boris_Khesin_CV.pdf">CV</a>
+        <a href="mailto:boris@khesin.net">Email</a>
+        <a href="https://github.com/Shagulka">GitHub</a>
+        <a href="https://www.linkedin.com/in/boris-khesin/">LinkedIn</a>
+        <button class="theme-toggle" aria-label="Toggle color theme" title="Toggle theme">
+          <span class="icon-sun"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+              stroke-width="1.6" stroke-linecap="round">
+              <circle cx="12" cy="12" r="4.2" />
+              <path
+                d="M12 2.5v2.2M12 19.3v2.2M21.5 12h-2.2M4.7 12H2.5M18.4 5.6l-1.5 1.5M7.1 16.9l-1.5 1.5M18.4 18.4l-1.5-1.5M7.1 7.1L5.6 5.6" />
+            </svg></span>
+          <span class="icon-moon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+              stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" />
+            </svg></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="page">
+
+    <section class="hero" id="top">
+      <h1>Boris Khesin</h1>
+      <p class="tagline">Economics &amp; Computer Science — Grinnell College, Class of 2028</p>
+      <p class="bio">
+        I'm a student at Grinnell College studying Economics and Computer Science, working at the
+        intersection of data, policy, and software. I lead Grinnell's Debate Union, teach as a TA in
+        economics and statistics, and build things ranging from internal business tools to iOS apps.
+      </p>
+
+      <nav class="hero-nav">
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#research">Research</a>
+        <a href="#education">Education</a>
+      </nav>
+
+      <div class="hero-contact">
+        <a href="Boris_Khesin_CV.pdf">CV</a>
+        <span class="sep">·</span>
+        <a href="https://github.com/Shagulka">GitHub</a>
+        <span class="sep">·</span>
+        <a href="https://www.linkedin.com/in/boris-khesin/">LinkedIn</a>
+        <button class="theme-toggle" aria-label="Toggle color theme" title="Toggle theme">
+          <span class="icon-sun"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+              stroke-width="1.6" stroke-linecap="round">
+              <circle cx="12" cy="12" r="4.2" />
+              <path
+                d="M12 2.5v2.2M12 19.3v2.2M21.5 12h-2.2M4.7 12H2.5M18.4 5.6l-1.5 1.5M7.1 16.9l-1.5 1.5M18.4 18.4l-1.5-1.5M7.1 7.1L5.6 5.6" />
+            </svg></span>
+          <span class="icon-moon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+              stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" />
+            </svg></span>
+        </button>
+      </div>
+
+      <p class="email-line"><span class="cat">Email —</span> <a href="mailto:boris@khesin.net">boris@khesin.net</a></p>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="section-grid">
+        <h2 class="section-label">Experience</h2>
+        <div>
+
+          <div class="entry">
+            <div class="entry-head">
+              <span class="entry-title">IT Services Intern <span class="entry-org">— Watson-Forsberg / Topcon
+                  Consulting</span></span>
+              <span class="entry-date">Jun 2026 – Present</span>
+            </div>
+            <p class="entry-tags">Software Engineering · IT Systems</p>
+            <p class="entry-desc">First-line IT support across Unanet, Procore, and Microsoft Entra; built a custom
+              internal event-planning app in Django synchronized with those systems.</p>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head">
+              <span class="entry-title">Product Manager Intern <span class="entry-org">— Tinkoff Bank</span></span>
+              <span class="entry-date">Apr 2024</span>
+            </div>
+            <p class="entry-tags">Product Management · Software</p>
+            <p class="entry-desc">Co-led development of a React.js university app with a Q&amp;A platform and
+              gamification; ran the design and sprint process in Figma and Trello.</p>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head">
+              <span class="entry-title">Teaching Assistant, International Economics <span class="entry-org">— Grinnell
+                  College</span></span>
+              <span class="entry-date">Jan – May 2026</span>
+            </div>
+            <p class="entry-tags">Teaching · Economics</p>
+            <p class="entry-desc">Guided 20+ students through trade theory and international finance; led weekly review
+              sessions and gave feedback on problem sets.</p>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head">
+              <span class="entry-title">Teaching Assistant, Applied Statistics <span class="entry-org">— Grinnell
+                  College</span></span>
+              <span class="entry-date">Jan – May 2026</span>
+            </div>
+            <p class="entry-tags">Teaching · Data &amp; Statistics</p>
+            <p class="entry-desc">Supported instruction in R and Excel; led sessions on regression, hypothesis testing,
+              and probability.</p>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head">
+              <span class="entry-title">Grader, Functional Programming <span class="entry-org">— Grinnell
+                  College</span></span>
+              <span class="entry-date">Sep – Dec 2025</span>
+            </div>
+            <p class="entry-tags">Teaching · Software Engineering</p>
+            <p class="entry-desc">Evaluated assignments and exams with written feedback on code and algorithms; managed
+              grading workflows to weekly deadlines.</p>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head">
+              <span class="entry-title">Mentor / Tutor, Yandex Academy <span class="entry-org">— Yandex</span></span>
+              <span class="entry-date">Dec 2023 – Aug 2024</span>
+            </div>
+            <p class="entry-tags">Teaching · Software Engineering</p>
+            <p class="entry-desc">Guided students in C++ and Python individually and in small groups; supported Django
+              projects through code review.</p>
+          </div>
+
+          <p class="also-label">Also —</p>
+          <div class="entry entry-minor">
+            <div class="entry-head">
+              <span class="entry-title">Event Worker, Swimming Team <span class="entry-org">— Grinnell
+                  College</span></span>
+              <span class="entry-date">Dec 2024 – May 2025</span>
+            </div>
+            <p class="entry-desc">Lane timer at competitive swim meets, including official NCAA events.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="section-grid">
+        <h2 class="section-label">Projects</h2>
+        <div>
+
+          <div class="project">
+            <p class="project-title">Tarot App</p>
+            <span class="project-stack">Swift · SwiftUI</span>
+            <p class="project-desc">An iOS app for AI-powered tarot readings. Pick a category and spread size, draw
+              cards, and get an AI-generated interpretation of the reading, designed to Apple's Human Interface
+              Guidelines.</p>
+            <a class="project-link" href="https://github.com/Shagulka/Tarot-App">View on GitHub →</a>
+          </div>
+
+          <div class="project">
+            <p class="project-title">Event Planner</p>
+            <span class="project-stack">Django · Python</span>
+            <p class="project-desc">An internal event-planning application built for Watson-Forsberg, synchronized with
+              Unanet, Procore, and Microsoft corporate systems, with budget projections and Google Maps integration.</p>
+            <a class="project-link" href="https://github.com/Shagulka/Event-Planner">View on GitHub →</a>
+          </div>
+
+          <div class="project">
+            <p class="project-title">Non-Human Vision</p>
+            <span class="project-stack">Unity · C#</span>
+            <p class="project-desc">A team-built VR/XR simulation of non-human animal visual systems, with custom
+              shaders replicating species-specific color perception and fields of view.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="research">
+      <div class="section-grid">
+        <h2 class="section-label">Research</h2>
+        <div>
+
+          <div class="paper">
+            <p class="paper-title">State Corporate Income Taxes and New Business Formation in the United States</p>
+            <p class="paper-meta">with B. Pilling — Grinnell College, 2026</p>
+            <p class="paper-desc">A balanced state-year panel (51 jurisdictions, 2004–2020) testing whether top marginal
+              state corporate tax rates deter new firm entry. Pooled OLS, two-way fixed-effects, and 2SLS
+              specifications; the negative cross-sectional association does not survive fixed-effects or IV
+              identification.</p>
+            <a class="project-link" href="papers/state-corporate-taxes.pdf">Read the paper (PDF) →</a>
+          </div>
+
+          <div class="paper">
+            <p class="paper-title">Economic, Demographic, and Policy Factors in COVID-19 Mortality Across Countries</p>
+            <p class="paper-meta">with B. Pilling and J. Pada — Grinnell College, December 2025</p>
+            <p class="paper-desc">A cross-national analysis of COVID-19 deaths per capita and per case across 150
+              countries. Univariable and multivariable regressions in R identify HDI as the strongest predictor of
+              deaths per capita, and population density as the strongest predictor of deaths per case.</p>
+            <a class="project-link" href="papers/covid19-mortality.pdf">Read the paper (PDF) →</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="section-grid">
+        <h2 class="section-label">Skills</h2>
+        <p class="skills-list">
+          <span class="cat">Languages —</span> Python, C++, Swift, R, SQL, JavaScript, HTML/CSS, Scheme/Racket<br>
+          <span class="cat">Frameworks &amp; tools —</span> Django, React.js, SwiftUI, Unity, Git, LaTeX, Figma<br>
+          <span class="cat">Quantitative —</span> Stata, pandas/NumPy, regression &amp; econometric analysis, panel
+          data, instrumental variables
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="education">
+      <div class="section-grid">
+        <h2 class="section-label">Education</h2>
+        <div>
+
+          <div class="entry">
+            <div class="entry-head">
+              <span class="entry-title">Grinnell College <span class="entry-org">— BA, Economics &amp; Computer
+                  Science</span></span>
+              <span class="entry-date">Aug 2024 – Present</span>
+            </div>
+            <p class="entry-desc">GPA 3.78. Debate Leader, Grinnell College Debate Union (Fall 2025–Present). Second
+              place, Pioneer Weekend Entrepreneurial Contest.</p>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head">
+              <span class="entry-title">Moscow State School 57 <span class="entry-org">— Mathematics &amp; Computer
+                  Science Track</span></span>
+              <span class="entry-date">Sep 2020 – Jun 2024</span>
+            </div>
+            <p class="entry-desc">GPA 4.0.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <p class="fineprint">© 2026 Boris Khesin</p>
+      <a class="back-to-top" href="#top">Back to top</a>
+    </footer>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('.theme-toggle').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var current = document.documentElement.getAttribute('data-theme');
+        var next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (e) { }
+      });
+    });
+
+    var hero = document.querySelector('.hero');
+    var topbar = document.querySelector('.topbar');
+    if ('IntersectionObserver' in window && hero && topbar) {
+      var heroObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          topbar.classList.toggle('visible', !entry.isIntersecting);
+        });
+      }, { threshold: 0 });
+      heroObserver.observe(hero);
+    }
+
+    var navLinks = document.querySelectorAll('.top-nav a');
+    var sections = document.querySelectorAll('section.section[id]');
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var id = entry.target.getAttribute('id');
+            navLinks.forEach(function (a) {
+              a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+            });
+          }
+        });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      sections.forEach(function (s) { observer.observe(s); });
+    }
+  </script>
+
+</body>
+
+</html>
