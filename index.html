@@ -59,7 +59,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,700;1,400;1,700&display=swap"
     rel="stylesheet">
   <style>
     :root {
@@ -98,7 +98,7 @@
       margin: 0;
       background: var(--bg);
       color: var(--ink);
-      font-family: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+      font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
       font-size: 18.5px;
       line-height: 1.7;
       transition: background 0.2s ease, color 0.2s ease;
@@ -255,15 +255,6 @@
       max-width: 58ch;
     }
 
-    .bio::first-letter {
-      font-size: 3.2rem;
-      line-height: 0.7;
-      float: left;
-      padding: 0.1rem 0.15em 0 0;
-      font-weight: 700;
-      color: var(--accent);
-    }
-
     .hero-nav {
       display: flex;
       flex-wrap: wrap;
@@ -330,7 +321,7 @@
       font-style: italic;
       font-weight: 700;
       letter-spacing: 1px;
-      font-size: 1.05rem;
+      font-size: 1.15rem;
       color: var(--ink-soft);
       margin: 0;
       padding-top: 0.1rem;
@@ -366,30 +357,35 @@
       justify-content: space-between;
       align-items: baseline;
       gap: 1rem;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
     }
 
     .entry-title {
       font-weight: 700;
-      font-size: 1.05rem;
+      font-size: 1.12rem;
+      flex: 1 1 auto;
+      min-width: 0;
     }
 
     .entry-org {
+      display: block;
       font-style: italic;
       font-weight: 400;
       color: var(--ink-soft);
+      margin-top: 0.15rem;
     }
 
     .entry-date {
+      flex: 0 0 auto;
       color: var(--ink-soft);
-      font-size: 0.9rem;
+      font-size: 0.96rem;
       white-space: nowrap;
     }
 
     .entry-tags {
       font-variant: small-caps;
       letter-spacing: 0.5px;
-      font-size: 0.86rem;
+      font-size: 0.92rem;
       color: var(--accent);
       margin: 0.35rem 0 0.4rem;
     }
@@ -397,7 +393,7 @@
     .entry-desc {
       margin: 0.3rem 0 0;
       color: var(--ink);
-      font-size: 0.96rem;
+      font-size: 1.03rem;
       max-width: 62ch;
     }
 
@@ -408,11 +404,11 @@
 
     .entry-minor .entry-title {
       font-weight: 700;
-      font-size: 0.98rem;
+      font-size: 1.05rem;
     }
 
     .entry-minor .entry-desc {
-      font-size: 0.86rem;
+      font-size: 0.92rem;
     }
 
     .also-label {
@@ -435,14 +431,14 @@
 
     .project-title {
       font-weight: 700;
-      font-size: 1.12rem;
+      font-size: 1.2rem;
       margin: 0 0 0.15rem;
     }
 
     .project-stack {
       display: block;
       font-variant: small-caps;
-      font-size: 0.9rem;
+      font-size: 0.96rem;
       letter-spacing: 0.5px;
       color: var(--ink-soft);
       margin-bottom: 0.5rem;
@@ -454,7 +450,7 @@
     }
 
     .project-link {
-      font-size: 0.95rem;
+      font-size: 1.02rem;
     }
 
     /* ---------- Research ---------- */
@@ -471,12 +467,12 @@
     .paper-title {
       font-weight: 700;
       font-style: italic;
-      font-size: 1.08rem;
+      font-size: 1.16rem;
       margin: 0 0 0.2rem;
     }
 
     .paper-meta {
-      font-size: 0.86rem;
+      font-size: 0.92rem;
       color: var(--ink-soft);
       margin-bottom: 0.5rem;
     }
@@ -489,14 +485,30 @@
     /* ---------- Skills ---------- */
 
     .skills-list {
-      color: var(--ink);
       max-width: 62ch;
-      margin: 0;
     }
 
-    .skills-list .cat {
-      color: var(--ink-soft);
-      font-style: italic;
+    .skill-row {
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .skill-row:last-child {
+      border-bottom: none;
+    }
+
+    .skill-cat {
+      font-variant: small-caps;
+      letter-spacing: 0.5px;
+      font-size: 0.92rem;
+      color: var(--accent);
+      margin: 0 0 0.3rem;
+    }
+
+    .skill-items {
+      margin: 0;
+      color: var(--ink);
+      font-size: 1.03rem;
     }
 
     /* ---------- Footer ---------- */
@@ -620,7 +632,7 @@
 
           <div class="entry">
             <div class="entry-head">
-              <span class="entry-title">IT Services Intern <span class="entry-org">— Watson-Forsberg / Topcon
+              <span class="entry-title">IT Services Intern <span class="entry-org">Watson-Forsberg / Topcon
                   Consulting</span></span>
               <span class="entry-date">Jun 2026 – Present</span>
             </div>
@@ -631,7 +643,7 @@
 
           <div class="entry">
             <div class="entry-head">
-              <span class="entry-title">Product Manager Intern <span class="entry-org">— Tinkoff Bank</span></span>
+              <span class="entry-title">Product Manager Intern <span class="entry-org">Tinkoff Bank</span></span>
               <span class="entry-date">Apr 2024</span>
             </div>
             <p class="entry-tags">Product Management · Software</p>
@@ -641,7 +653,7 @@
 
           <div class="entry">
             <div class="entry-head">
-              <span class="entry-title">Teaching Assistant, International Economics <span class="entry-org">— Grinnell
+              <span class="entry-title">Teaching Assistant, International Economics <span class="entry-org">Grinnell
                   College</span></span>
               <span class="entry-date">Jan – May 2026</span>
             </div>
@@ -652,7 +664,7 @@
 
           <div class="entry">
             <div class="entry-head">
-              <span class="entry-title">Teaching Assistant, Applied Statistics <span class="entry-org">— Grinnell
+              <span class="entry-title">Teaching Assistant, Applied Statistics <span class="entry-org">Grinnell
                   College</span></span>
               <span class="entry-date">Jan – May 2026</span>
             </div>
@@ -663,7 +675,7 @@
 
           <div class="entry">
             <div class="entry-head">
-              <span class="entry-title">Grader, Functional Programming <span class="entry-org">— Grinnell
+              <span class="entry-title">Grader, Functional Programming <span class="entry-org">Grinnell
                   College</span></span>
               <span class="entry-date">Sep – Dec 2025</span>
             </div>
@@ -674,7 +686,7 @@
 
           <div class="entry">
             <div class="entry-head">
-              <span class="entry-title">Mentor / Tutor, Yandex Academy <span class="entry-org">— Yandex</span></span>
+              <span class="entry-title">Mentor / Tutor, Yandex Academy <span class="entry-org">Yandex</span></span>
               <span class="entry-date">Dec 2023 – Aug 2024</span>
             </div>
             <p class="entry-tags">Teaching · Software Engineering</p>
@@ -685,7 +697,7 @@
           <p class="also-label">Also —</p>
           <div class="entry entry-minor">
             <div class="entry-head">
-              <span class="entry-title">Event Worker, Swimming Team <span class="entry-org">— Grinnell
+              <span class="entry-title">Event Worker, Swimming Team <span class="entry-org">Grinnell
                   College</span></span>
               <span class="entry-date">Dec 2024 – May 2025</span>
             </div>
@@ -739,7 +751,7 @@
             <p class="paper-meta">with B. Pilling — Grinnell College, 2026</p>
             <p class="paper-desc">A balanced state-year panel (51 jurisdictions, 2004–2020) testing whether top marginal
               state corporate tax rates deter new firm entry. Pooled OLS, two-way fixed-effects, and 2SLS
-              specifications; the negative cross-sectional association does not survive fixed-effects or IV
+              specifications in Stata; the negative cross-sectional association does not survive fixed-effects or IV
               identification.</p>
             <a class="project-link" href="papers/state-corporate-taxes.pdf">Read the paper (PDF) →</a>
           </div>
@@ -760,12 +772,25 @@
     <section class="section" id="skills">
       <div class="section-grid">
         <h2 class="section-label">Skills</h2>
-        <p class="skills-list">
-          <span class="cat">Languages —</span> Python, C++, Swift, R, SQL, JavaScript, HTML/CSS, Scheme/Racket<br>
-          <span class="cat">Frameworks &amp; tools —</span> Django, React.js, SwiftUI, Unity, Git, LaTeX, Figma<br>
-          <span class="cat">Quantitative —</span> Stata, pandas/NumPy, regression &amp; econometric analysis, panel
-          data, instrumental variables
-        </p>
+        <div class="skills-list">
+
+          <div class="skill-row">
+            <p class="skill-cat">Languages</p>
+            <p class="skill-items">Python, C++, Swift, R, SQL, JavaScript, HTML/CSS, Scheme/Racket</p>
+          </div>
+
+          <div class="skill-row">
+            <p class="skill-cat">Frameworks &amp; Tools</p>
+            <p class="skill-items">Django, React.js, SwiftUI, Unity, Git, LaTeX, Figma</p>
+          </div>
+
+          <div class="skill-row">
+            <p class="skill-cat">Quantitative</p>
+            <p class="skill-items">Stata, pandas/NumPy, regression &amp; econometric analysis, panel data,
+              instrumental variables</p>
+          </div>
+
+        </div>
       </div>
     </section>
 
@@ -776,7 +801,7 @@
 
           <div class="entry">
             <div class="entry-head">
-              <span class="entry-title">Grinnell College <span class="entry-org">— BA, Economics &amp; Computer
+              <span class="entry-title">Grinnell College <span class="entry-org">BA, Economics &amp; Computer
                   Science</span></span>
               <span class="entry-date">Aug 2024 – Present</span>
             </div>
@@ -786,7 +811,7 @@
 
           <div class="entry">
             <div class="entry-head">
-              <span class="entry-title">Moscow State School 57 <span class="entry-org">— Mathematics &amp; Computer
+              <span class="entry-title">Moscow State School 57 <span class="entry-org">Mathematics &amp; Computer
                   Science Track</span></span>
               <span class="entry-date">Sep 2020 – Jun 2024</span>
             </div>
