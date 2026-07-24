@@ -474,6 +474,71 @@
       gap: 0.3rem 1.3rem;
     }
 
+    .project-figure {
+      margin: 0.9rem 0 0.2rem;
+    }
+
+    .project-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      background: #fff;
+    }
+
+    .project-figure figcaption {
+      margin-top: 0.4rem;
+      font-size: 0.88rem;
+      font-style: italic;
+      color: var(--ink-soft);
+    }
+
+    .project-figure-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 0.9rem 0 0.2rem;
+    }
+
+    .project-figure-pair .project-figure {
+      margin: 0;
+    }
+
+    @media (max-width: 520px) {
+      .project-figure-pair {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .phone-shots {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 1.6rem;
+      margin: 0.9rem 0 0.2rem;
+    }
+
+    .phone-shot {
+      margin: 0;
+      flex: 0 1 220px;
+      max-width: 220px;
+    }
+
+    .phone-shot img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+    }
+
+    .phone-shot figcaption {
+      margin-top: 0.4rem;
+      font-size: 0.88rem;
+      font-style: italic;
+      color: var(--ink-soft);
+    }
+
     .project-link {
       font-size: 1.02rem;
     }
@@ -618,7 +683,7 @@
       <p class="tagline">Economics &amp; Computer Science — Grinnell College, Class of 2028</p>
       <p class="bio">
         I study Economics and Computer Science at Grinnell College, and I like work where data, business, and
-        software meet. Last summer I consulted for a Minneapolis construction firm and shipped an internal system
+        software meet. In summer 2026 I consulted for a Minneapolis construction firm and shipped an internal system
         the whole company now runs on. I lead Grinnell's Debate Union, mentor students in economics and statistics,
         and run econometric research that tries hard to break its own results.
       </p>
@@ -684,7 +749,7 @@
           <div class="entry">
             <div class="entry-head">
               <span class="entry-title">Product Manager Intern <span class="entry-org">Tinkoff Bank</span></span>
-              <span class="entry-date">Apr 2024</span>
+              <span class="entry-date">Apr – May 2024</span>
             </div>
             <p class="entry-tags">Product Management · Software</p>
             <p class="entry-desc">Worked directly with the product manager on an 8-person team at one of the world's
@@ -731,9 +796,9 @@
               <span class="entry-date">Dec 2023 – Aug 2024</span>
             </div>
             <p class="entry-tags">Teaching · Software Engineering</p>
-            <p class="entry-desc">Hired as a tutor after finishing Yandex Academy's backend course as a student; taught
-              50+ students C++ and Python one-on-one and in small groups, and supported their Django projects through
-              code review.</p>
+            <p class="entry-desc">Became an unpaid mentor/tutor after finishing Yandex Academy's backend course as a
+              student; taught 50+ students C++ and Python one-on-one and in small groups, and supported their Django
+              projects through code review.</p>
           </div>
 
           <p class="also-label">Also —</p>
@@ -768,10 +833,15 @@
           <div class="project">
             <p class="project-title">PIPS — 16-bit CPU &amp; Assembler</p>
             <span class="project-stack">Logisim · Python</span>
-            <p class="project-desc">A microcoded 16-bit CPU built in Logisim for a computer organization course, with
-              a custom ALU, register file, and shifter driven by a control-ROM microprogram across 16 opcodes. Paired
-              with a Python assembler supporting 40+ instructions, verified with 14 test programs spanning recursion,
-              arithmetic, and memory-mapped I/O.</p>
+            <p class="project-desc">A microcoded 16-bit CPU built with a partner in Logisim for a computer organization
+              course, with a custom ALU, register file, and shifter driven by a control-ROM microprogram across 16
+              opcodes. Paired with a Python assembler supporting 40+ instructions, verified with 14 test programs
+              spanning recursion, arithmetic, and memory-mapped I/O.</p>
+            <figure class="project-figure">
+              <img src="assets/pips-cpu.png"
+                alt="The PIPS processor datapath in Logisim: program counter, instruction memory, microprogram ROM, register file, ALU, and data memory wired together.">
+              <figcaption>The full datapath in Logisim — control ROM, register file, ALU, and memory-mapped I/O.</figcaption>
+            </figure>
           </div>
 
           <div class="project">
@@ -790,9 +860,21 @@
           <div class="project">
             <p class="project-title">Tarot App</p>
             <span class="project-stack">Swift · SwiftUI</span>
-            <p class="project-desc">An iOS app for AI-powered tarot readings. Pick a category and spread size, draw
-              cards, and get an AI-generated interpretation of the reading, designed to Apple's Human Interface
-              Guidelines.</p>
+            <p class="project-desc">An iOS app for AI-powered tarot readings. Pick a spread — a 3-card Day, 4-card
+              Week, or 5-card Love or Career reading — draw the cards, and get an AI-generated interpretation of the
+              whole spread, designed to Apple's Human Interface Guidelines.</p>
+            <div class="phone-shots">
+              <figure class="phone-shot">
+                <img src="assets/tarot-choose.jpg"
+                  alt="The Tarot app's reading picker, listing 3-card Day, 4-card Week, 5-card Love, and 5-card Career spreads.">
+                <figcaption>Choosing a spread.</figcaption>
+              </figure>
+              <figure class="phone-shot">
+                <img src="assets/tarot-reading.jpg"
+                  alt="A three-card tarot spread — The Sun, The Tower, The High Priestess — with an AI-generated reading below.">
+                <figcaption>A spread with a Gemini-written reading.</figcaption>
+              </figure>
+            </div>
             <div class="project-links">
               <a class="project-link" href="https://github.com/Shagulka/Tarot-App">View on GitHub →</a>
             </div>
@@ -803,6 +885,18 @@
             <span class="project-stack">Unity · C#</span>
             <p class="project-desc">A team-built VR/XR simulation of non-human animal visual systems, with custom
               shaders replicating species-specific color perception and fields of view.</p>
+            <div class="project-figure-pair">
+              <figure class="project-figure">
+                <img src="assets/nonhuman-bee.jpg"
+                  alt="A room rendered as a mosaic of hexagonal tiles, simulating a bee's compound-eye vision.">
+                <figcaption>Bee — the compound eye, rendered as a hexagonal mosaic.</figcaption>
+              </figure>
+              <figure class="project-figure">
+                <img src="assets/nonhuman-dog.jpg"
+                  alt="A classroom rendered in muted blues and yellows with reds washed out, simulating a dog's dichromatic vision.">
+                <figcaption>Dog — dichromatic vision, with reds and greens collapsed toward yellow.</figcaption>
+              </figure>
+            </div>
           </div>
 
         </div>
