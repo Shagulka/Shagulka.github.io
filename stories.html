@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) { }
+    })();
+  </script>
+
+  <title>Stories — Boris Khesin</title>
+  <meta name="description"
+    content="Longer write-ups of the work behind the resume: Grin &amp; Go, the Watson-Forsberg event planner, and teaching myself to fine-tune a language model.">
+  <meta name="author" content="Boris Khesin">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://khesin.net/stories.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://khesin.net/stories.html">
+  <meta property="og:title" content="Stories — Boris Khesin">
+  <meta property="og:description"
+    content="Longer write-ups of the work behind the resume — the reasoning, the numbers, and what I got wrong.">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Stories — Boris Khesin">
+
+  <meta name="theme-color" content="#f7f4ee" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1a1611" media="(prefers-color-scheme: dark)">
+
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23f7f4ee'/%3E%3Ctext x='32' y='43' font-family='Georgia, serif' font-size='30' font-weight='600' fill='%2301411c' text-anchor='middle'%3EBK%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --max: 720px;
+      --topbar-h: 3.2rem;
+    }
+
+    :root[data-theme="light"] {
+      --bg: #f7f4ee;
+      --bg-rgb: 247, 244, 238;
+      --ink: #241f18;
+      --ink-soft: #6b6353;
+      --accent: #01411c;
+      --rule: #ddd3bf;
+      --card: #efe9dc;
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #1a1611;
+      --bg-rgb: 26, 22, 17;
+      --ink: #ece5d6;
+      --ink-soft: #a89d87;
+      --accent: #6dc798;
+      --rule: #3a3225;
+      --card: #221d16;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+      font-size: 18.5px;
+      line-height: 1.75;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+      text-underline-offset: 3px;
+    }
+
+    a:hover {
+      text-decoration-thickness: 2px;
+    }
+
+    /* ---------- Top bar ---------- */
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(var(--bg-rgb), 0.86);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .topbar-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0.6rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.4rem 1.3rem;
+      min-height: var(--topbar-h);
+    }
+
+    .wordmark {
+      font-weight: 700;
+      font-size: 0.96rem;
+      color: var(--ink);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .top-nav {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .top-nav a {
+      color: var(--ink-soft);
+      text-decoration: none;
+      font-variant: small-caps;
+      letter-spacing: 0.5px;
+      font-size: 0.92rem;
+    }
+
+    .top-nav a:hover {
+      color: var(--accent);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      width: 2rem;
+      height: 2rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-soft);
+      cursor: pointer;
+      padding: 0;
+      flex-shrink: 0;
+    }
+
+    .theme-toggle:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .icon-sun,
+    .icon-moon {
+      display: none;
+    }
+
+    :root[data-theme="dark"] .icon-sun {
+      display: inline-flex;
+    }
+
+    :root[data-theme="light"] .icon-moon {
+      display: inline-flex;
+    }
+
+    /* ---------- Page ---------- */
+
+    .page {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    .page-head {
+      margin-bottom: 3rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5.5vw, 2.7rem);
+      font-weight: 700;
+      margin: 0 0 0.5rem;
+    }
+
+    .lede {
+      color: var(--ink-soft);
+      font-style: italic;
+      font-size: 1.1rem;
+      margin: 0;
+      max-width: 60ch;
+    }
+
+    .toc {
+      margin: 1.6rem 0 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem 1.1rem;
+      font-variant: small-caps;
+      letter-spacing: 0.5px;
+      font-size: 1rem;
+    }
+
+    .toc a {
+      color: var(--ink-soft);
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      color: var(--accent);
+    }
+
+    /* ---------- Story ---------- */
+
+    .story {
+      padding-top: 2.4rem;
+      margin-top: 2.4rem;
+      border-top: 1px solid var(--rule);
+      scroll-margin-top: calc(var(--topbar-h) + 1.4rem);
+    }
+
+    .story-kicker {
+      font-variant: small-caps;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+      color: var(--accent);
+      margin: 0 0 0.3rem;
+    }
+
+    .story h2 {
+      font-size: clamp(1.5rem, 4vw, 1.95rem);
+      font-weight: 700;
+      margin: 0 0 0.35rem;
+      line-height: 1.25;
+    }
+
+    .story-meta {
+      color: var(--ink-soft);
+      font-style: italic;
+      font-size: 0.98rem;
+      margin: 0 0 1.4rem;
+    }
+
+    .story p {
+      max-width: 62ch;
+    }
+
+    .story h3 {
+      font-variant: small-caps;
+      letter-spacing: 0.6px;
+      font-size: 1.1rem;
+      color: var(--ink-soft);
+      margin: 1.8rem 0 0.4rem;
+    }
+
+    /* ---------- Lesson / pull block ---------- */
+
+    .lesson {
+      border-left: 3px solid var(--accent);
+      background: var(--card);
+      padding: 0.9rem 1.2rem;
+      margin: 1.5rem 0;
+      border-radius: 0 6px 6px 0;
+      max-width: 62ch;
+    }
+
+    .lesson p {
+      margin: 0;
+    }
+
+    .lesson .lesson-label {
+      display: block;
+      font-variant: small-caps;
+      letter-spacing: 0.8px;
+      font-size: 0.82rem;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    /* ---------- Figure ---------- */
+
+    .story-figure {
+      margin: 1.6rem 0;
+    }
+
+    .story-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--rule);
+    }
+
+    .story-figure figcaption {
+      margin-top: 0.55rem;
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--ink-soft);
+      max-width: 62ch;
+    }
+
+    /* ---------- Metrics ---------- */
+
+    .metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.6rem 2.4rem;
+      margin: 1.4rem 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .metrics li {
+      margin: 0;
+    }
+
+    .metrics .num {
+      display: block;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1.1;
+    }
+
+    .metrics .cap {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+    }
+
+    /* ---------- Staging table ---------- */
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 1.3rem 0;
+    }
+
+    table.stages {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 460px;
+      font-size: 0.98rem;
+    }
+
+    table.stages th,
+    table.stages td {
+      text-align: left;
+      vertical-align: top;
+      padding: 0.6rem 0.9rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    table.stages th {
+      font-variant: small-caps;
+      letter-spacing: 0.5px;
+      font-size: 0.86rem;
+      color: var(--accent);
+      border-bottom: 1.5px solid var(--rule);
+    }
+
+    table.stages td:first-child {
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* ---------- Footer ---------- */
+
+    .story-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem 1.3rem;
+      margin-top: 1.3rem;
+      font-variant: small-caps;
+      letter-spacing: 0.5px;
+      font-size: 0.95rem;
+    }
+
+    footer.site-footer {
+      text-align: center;
+      border-top: 1px solid var(--rule);
+      padding-top: 2rem;
+      margin-top: 3.4rem;
+    }
+
+    footer.site-footer .fineprint {
+      color: var(--ink-soft);
+      font-size: 0.85rem;
+      margin: 0 0 0.6rem;
+    }
+
+    footer.site-footer a {
+      font-variant: small-caps;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        font-size: 17px;
+      }
+
+      .page {
+        padding: 2.2rem 1.25rem 3rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="wordmark" href="index.html">← Boris Khesin</a>
+      <nav class="top-nav">
+        <a href="#grin-and-go">Grin &amp; Go</a>
+        <a href="#event-planner">Event Planner</a>
+        <a href="#gpt">GPT Fine-Tune</a>
+      </nav>
+      <button class="theme-toggle" aria-label="Toggle color theme" title="Toggle theme">
+        <span class="icon-sun"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+            stroke-width="1.6" stroke-linecap="round">
+            <circle cx="12" cy="12" r="4.2" />
+            <path
+              d="M12 2.5v2.2M12 19.3v2.2M21.5 12h-2.2M4.7 12H2.5M18.4 5.6l-1.5 1.5M7.1 16.9l-1.5 1.5M18.4 18.4l-1.5-1.5M7.1 7.1L5.6 5.6" />
+          </svg></span>
+        <span class="icon-moon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+            stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" />
+          </svg></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="page">
+
+    <div class="page-head">
+      <h1>Stories</h1>
+      <p class="lede">Longer write-ups of the work behind the resume — the reasoning, the numbers, and the parts I got
+        wrong. A résumé line is a claim; this is the working.</p>
+      <nav class="toc">
+        <a href="#grin-and-go">Grin &amp; Go</a>
+        <a href="#event-planner">The Event Planner</a>
+        <a href="#gpt">Teaching Myself to Fine-Tune a Model</a>
+      </nav>
+    </div>
+
+    <!-- ============================ GRIN & GO ============================ -->
+    <article class="story" id="grin-and-go">
+      <p class="story-kicker">Pioneer Weekend · Second of 11 teams</p>
+      <h2>Grin &amp; Go</h2>
+      <p class="story-meta">48 hours · a team of five · a campus vending business, modeled to the dollar</p>
+
+      <figure class="story-figure">
+        <img src="assets/grin-and-go-award.jpg"
+          alt="The Grin &amp; Go team holding an oversized second-place check for $1,500 at Grinnell College's Pioneer Weekend, September 2025.">
+        <figcaption>Grin &amp; Go, second of 11 teams at Grinnell's Pioneer Weekend, September 2025.</figcaption>
+      </figure>
+
+      <p>Pioneer Weekend is Grinnell's entrepreneurial contest: idea to pitch in 48 hours, eleven teams. Ours picked
+        food. Students at Grinnell miss meals — not for lack of money, but because dining halls close and classes don't
+        move. We surveyed about 3% of the student body: 68.6% said they were often or always hungry between classes or
+        working late, 67.5% said they missed meals for lack of time, and 83.7% said they'd use a service that fixed it.</p>
+
+      <p>Our answer was Grin &amp; Go: refrigerated smart vending machines placed around campus, stocked with real food,
+        open at 2 a.m. I owned two things — the money and the staging.</p>
+
+      <h3>The money</h3>
+      <p>Every number had to come from somewhere a judge could check. Machines were Genius Vend AI combo units at $4,699,
+        rounded to $5,000 to cover shipping and install. Labor used Grinnell's flat $13.77/hour student wage and an
+        industry maintenance benchmark of three hours per machine per week, plus two for stocking — five hours a machine,
+        ten workers over a 30-week year, $20,655. On the demand side, 1,700 students at $30 a year is $408,000 of
+        potential revenue.</p>
+
+      <ul class="metrics">
+        <li><span class="num">40.4%</span><span class="cap">of expected spending to break even (~650 students)</span></li>
+        <li><span class="num">$110k</span><span class="cap">projected annual profit if the survey held</span></li>
+        <li><span class="num">2 / 11</span><span class="cap">teams — recognized by President Anne Harris</span></li>
+      </ul>
+
+      <h3>The staging</h3>
+      <p>I split the launch into three stages so each one paid for the next, and no stage bet money we hadn't already
+        made.</p>
+
+      <div class="table-wrap">
+        <table class="stages">
+          <thead>
+            <tr>
+              <th>Stage</th>
+              <th>Spend</th>
+              <th>What it proves</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1 · One machine</td>
+              <td>$5,000</td>
+              <td>Does the hardware work and do students use it? Stocked only with meal boxes the campus grill already
+                makes — so food cost is zero and no existing sale is lost.</td>
+            </tr>
+            <tr>
+              <td>2 · Eight machines</td>
+              <td>$40,000</td>
+              <td>A student-run organization: ~$240,000 of revenue, $60,000 of profit, and ten campus jobs. Now it's a
+                business.</td>
+            </tr>
+            <tr>
+              <td>3 · Local restaurants</td>
+              <td>From profit</td>
+              <td>Local restaurants supply meals; we add margin and give them the campus market. No new machines.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Anything unsold after five days goes to a local food bank — the same model campus dining already uses.</p>
+
+      <h3>We came second. Here's why</h3>
+      <p>A real-time gym-occupancy app beat us. One judge was a former athlete and pushed hard for it — but that isn't
+        the real reason, and I only saw the real reason afterward. Their product scaled beyond one campus; ours did not.
+        Grin &amp; Go worked <em>because</em> it sat on Grinnell's own dining infrastructure — that's what made food cost
+        zero in stage one and killed the cannibalization objection. The same thing capped it at one campus. I'd built a
+        model that was hard to argue with and impossible to grow, and I never asked what it was worth at ten colleges.</p>
+
+      <div class="lesson">
+        <span class="lesson-label">What I took from it</span>
+        <p>A model can be internally airtight and still answer the wrong question. The judges asked what mine couldn't:
+          how big does this get? I'd optimized for defensible over scalable. Now I ask the size-of-the-prize question
+          first.</p>
+      </div>
+
+      <div class="story-links">
+        <a href="assets/grin-and-go-deck.pdf">Read the pitch deck (PDF) →</a>
+        <a href="https://pioneerweekend.sites.grinnell.edu/previous-years/past-winners/">Grinnell's public results →</a>
+        <a href="index.html#leadership">Back to the résumé line →</a>
+      </div>
+    </article>
+
+    <!-- ============================ EVENT PLANNER ============================ -->
+    <article class="story" id="event-planner">
+      <p class="story-kicker">Topcon Consulting · client: Watson-Forsberg</p>
+      <h2>The Event Planner</h2>
+      <p class="story-meta">Summer 2026 · a real client, a real mess, and a rebuild under live data</p>
+
+      <p>Last summer I was a technology consulting intern placed with Watson-Forsberg, a Minneapolis construction firm of
+        about twenty people. They ran company events off a single Excel spreadsheet made three years earlier. By the time
+        I saw it, it had no structure and no consistent format left — and most of what mattered wasn't in it at all. It
+        was in the VP's head.</p>
+
+      <p>My job was to replace it with something the whole firm could use. Rather than work from a spec, I gathered
+        requirements from the staff themselves, then built it in Django: budget projections, Google Maps, and links into
+        Unanet, Procore, and the firm's Microsoft systems, so it sat inside the tools they already used instead of beside
+        them.</p>
+
+      <figure class="story-figure">
+        <img src="assets/event-planner.jpg"
+          alt="The event-planner dashboard: a grid of upcoming events with dates, venues, ticket counts, budgets, and guest lists.">
+        <figcaption>The dashboard that replaced the spreadsheet — every event, budget, and guest list in one view.</figcaption>
+      </figure>
+
+      <ul class="metrics">
+        <li><span class="num">$40k</span><span class="cap">of event budget managed</span></li>
+        <li><span class="num">50+</span><span class="cap">events · 300+ contacts</span></li>
+        <li><span class="num">178</span><span class="cap">companies in the directory</span></li>
+      </ul>
+
+      <h3>The part worth telling</h3>
+      <p>I assumed an event was one day in one timezone. It is not. Watson-Forsberg runs multi-day events, and events
+        across timezones — and I found this out <em>after</em> the firm was already using the app. So I rebuilt the entire
+        datetime layer underneath live production data, with people depending on it and their records already in it.</p>
+
+      <div class="lesson">
+        <span class="lesson-label">What I took from it</span>
+        <p>I got the model of the business wrong at the start, and the cost of fixing it went up every day the app was in
+          use. Twenty more minutes asking about edge cases at the requirements stage would have saved the rebuild. So now
+          I ask what the <em>exceptions</em> look like before I ask what the normal case looks like.</p>
+      </div>
+
+      <p>It's still in production at Watson-Forsberg, run by the whole firm. It replaced the spreadsheet outright — the
+        closest thing I own to a consulting case with an answer at the end of it.</p>
+
+      <div class="story-links">
+        <a href="https://github.com/Shagulka/Event-Planner">View on GitHub →</a>
+        <a href="index.html#experience">Back to the résumé line →</a>
+      </div>
+    </article>
+
+    <!-- ============================ GPT ============================ -->
+    <article class="story" id="gpt">
+      <p class="story-kicker">2023 · no course, no mentor</p>
+      <h2>Teaching Myself to Fine-Tune a Model</h2>
+      <p class="story-meta">Three weeks of transformers, one old laptop, and a country that blocked the tools</p>
+
+      <p>Early 2023. I wanted to fine-tune a language model to imitate how my friends text. I had no course and no mentor,
+        so I read until I understood how transformers actually work — about three weeks of it — exported years of
+        group-chat messages, cleaned them, and fine-tuned a GPT model on the result.</p>
+
+      <p>The harder problem was compute. The only machine I had was an old laptop, and the usual cloud training services
+        were closed to me where I lived. Rather than treat that as the end of the project, I engineered my own way to the
+        compute I needed and trained the model anyway.</p>
+
+      <div class="lesson">
+        <span class="lesson-label">What I took from it</span>
+        <p>Three things had to happen at once — learn hard material fast and unassigned, work around a hardware and access
+          wall, and finish with something real. The through-line is the one I keep coming back to: don't accept a dead
+          end as the end.</p>
+      </div>
+
+      <p>I presented the work at an AI conference during a summer program in Moscow Oblast. That talk led directly to the
+        product internship at Tinkoff Bank — which is how a weekend curiosity became the first line of a career.</p>
+
+      <figure class="story-figure">
+        <img src="assets/gpt-presentation.jpg"
+          alt="Boris Khesin on stage with a microphone, presenting the fine-tuned model to an audience, June 2023.">
+        <figcaption>Presenting the fine-tuned model on stage, summer 2023.</figcaption>
+      </figure>
+
+      <div class="story-links">
+        <a href="index.html#projects">Back to the résumé line →</a>
+      </div>
+    </article>
+
+    <!-- ============================ RESEARCH POINTER ============================ -->
+    <article class="story" id="more">
+      <p class="story-kicker">Also worth a read</p>
+      <h2>The research</h2>
+      <p>Two econometrics papers carry the same instinct as the stories above — test a claim hard enough that a null
+        result is worth reporting. <a href="papers/state-corporate-taxes.pdf">State corporate taxes and new business
+          formation</a> (a state-year panel with fixed effects and 2SLS) and <a href="papers/covid19-mortality.pdf">the
+          cross-country COVID-19 mortality study</a> are both on the <a href="index.html#research">home page</a>.</p>
+    </article>
+
+    <footer class="site-footer">
+      <p class="fineprint">© 2026 Boris Khesin</p>
+      <a href="index.html">← Back home</a>
+    </footer>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('.theme-toggle').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var current = document.documentElement.getAttribute('data-theme');
+        var next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (e) { }
+      });
+    });
+  </script>
+
+</body>
+
+</html>

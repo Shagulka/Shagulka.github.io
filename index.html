@@ -16,7 +16,7 @@
 
   <title>Boris Khesin — Economics &amp; Computer Science, Grinnell College</title>
   <meta name="description"
-    content="Boris Khesin is an Economics &amp; Computer Science student at Grinnell College (Class of 2028), building software across web, mobile, and applied econometric research.">
+    content="Boris Khesin is an Economics &amp; Computer Science student at Grinnell College (Class of 2028), working where data, business, and software meet — technology consulting, econometric research, and software from iOS apps to a campus vending business.">
   <meta name="author" content="Boris Khesin">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://khesin.net/">
@@ -25,12 +25,12 @@
   <meta property="og:url" content="https://khesin.net/">
   <meta property="og:title" content="Boris Khesin">
   <meta property="og:description"
-    content="Economics & Computer Science student at Grinnell College — projects, research, and experience.">
+    content="Economics & Computer Science student at Grinnell College — technology consulting, applied research, and software.">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Boris Khesin">
   <meta name="twitter:description"
-    content="Economics & Computer Science student at Grinnell College — projects, research, and experience.">
+    content="Economics & Computer Science student at Grinnell College — technology consulting, applied research, and software.">
 
   <meta name="theme-color" content="#f7f4ee" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#1a1611" media="(prefers-color-scheme: dark)">
@@ -53,6 +53,11 @@
     "@type": "CollegeOrUniversity",
     "name": "Grinnell College"
   },
+  "homeLocation": {
+    "@type": "Place",
+    "name": "Grinnell, Iowa"
+  },
+  "knowsLanguage": ["English", "Russian", "Mandarin Chinese"],
   "description": "Economics & Computer Science student at Grinnell College, Class of 2028."
 }
 </script>
@@ -74,6 +79,7 @@
       --ink-soft: #6b6353;
       --accent: #01411c;
       --rule: #ddd3bf;
+      --card: #efe9dc;
     }
 
     :root[data-theme="dark"] {
@@ -83,6 +89,7 @@
       --ink-soft: #a89d87;
       --accent: #6dc798;
       --rule: #3a3225;
+      --card: #221d16;
     }
 
     * {
@@ -252,7 +259,11 @@
 
     .bio {
       margin: 0;
-      max-width: 58ch;
+      max-width: 60ch;
+    }
+
+    .bio + .bio {
+      margin-top: 0.9rem;
     }
 
     .hero-nav {
@@ -418,6 +429,14 @@
       margin: 1.2rem 0 -0.3rem;
     }
 
+    .read-story {
+      display: inline-block;
+      margin-top: 0.55rem;
+      font-variant: small-caps;
+      letter-spacing: 0.5px;
+      font-size: 0.95rem;
+    }
+
     /* ---------- Projects ---------- */
 
     .project {
@@ -447,6 +466,12 @@
     .project-desc {
       margin: 0 0 0.5rem;
       max-width: 62ch;
+    }
+
+    .project-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem 1.3rem;
     }
 
     .project-link {
@@ -561,7 +586,9 @@
         <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
         <a href="#research">Research</a>
+        <a href="#leadership">Leadership</a>
         <a href="#education">Education</a>
+        <a href="stories.html">Stories</a>
       </nav>
       <div class="top-contact">
         <a href="Boris_Khesin_CV.pdf">CV</a>
@@ -590,16 +617,24 @@
       <h1>Boris Khesin</h1>
       <p class="tagline">Economics &amp; Computer Science — Grinnell College, Class of 2028</p>
       <p class="bio">
-        I'm a student at Grinnell College studying Economics and Computer Science, working at the
-        intersection of data, policy, and software. I lead Grinnell's Debate Union, teach as a TA in
-        economics and statistics, and build things ranging from internal business tools to iOS apps.
+        I study Economics and Computer Science at Grinnell College, and I like work where data, business, and
+        software meet. Last summer I consulted for a Minneapolis construction firm and shipped an internal system
+        the whole company now runs on. I lead Grinnell's Debate Union, mentor students in economics and statistics,
+        and run econometric research that tries hard to break its own results.
+      </p>
+      <p class="bio">
+        I also build things — an iOS app, a 16-bit CPU from logic gates, a language model I taught myself to fine-tune,
+        and a campus vending business that took second of eleven teams at Grinnell's startup weekend. In spring 2027
+        I head to Shanghai to study international business.
       </p>
 
       <nav class="hero-nav">
         <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
         <a href="#research">Research</a>
+        <a href="#leadership">Leadership</a>
         <a href="#education">Education</a>
+        <a href="stories.html">Stories</a>
       </nav>
 
       <div class="hero-contact">
@@ -636,11 +671,14 @@
                   (client: Watson-Forsberg)</span></span>
               <span class="entry-date">Jun – Jul 2026</span>
             </div>
-            <p class="entry-tags">IT Support · Data Analysis · Software Engineering</p>
-            <p class="entry-desc">First-line IT support for 20+ office and construction staff across Unanet, Procore,
-              and Microsoft Entra at a Minneapolis construction firm; analyzed spending across 50+ company events
-              into budget projections, and built a custom internal event-planning app in Django synchronized with
-              those systems.</p>
+            <p class="entry-tags">Client Delivery · Data Analysis · Software</p>
+            <p class="entry-desc">Placed with Watson-Forsberg, a 20-person Minneapolis construction firm. Gathered
+              requirements from the staff themselves and delivered an internal event-planning system that replaced the
+              three-year-old spreadsheet the firm had run on — in production today across $40,000 of event budget, 50+
+              events, a 300+ person directory, and 178 companies. Built it in Django, wired into Unanet, Procore, and
+              the firm's Microsoft systems; also handled first-line IT support across those platforms and turned spending
+              across 50+ events into budget projections.</p>
+            <a class="read-story" href="stories.html#event-planner">Read the story →</a>
           </div>
 
           <div class="entry">
@@ -649,8 +687,9 @@
               <span class="entry-date">Apr 2024</span>
             </div>
             <p class="entry-tags">Product Management · Software</p>
-            <p class="entry-desc">Co-led a 5–8 person team building a React.js university app with a Q&amp;A platform
-              and gamification; ran the design and sprint process in Figma and Trello.</p>
+            <p class="entry-desc">Worked directly with the product manager on an 8-person team at one of the world's
+              largest digital banks, building a React.js Q&amp;A and gamification app for Central University students;
+              shaped the user flows, built the Figma prototypes, and ran the sprint backlog in Trello.</p>
           </div>
 
           <div class="entry">
@@ -672,7 +711,7 @@
             </div>
             <p class="entry-tags">Teaching · Data &amp; Statistics</p>
             <p class="entry-desc">Led weekly sessions on regression, hypothesis testing, and probability using R and
-              Excel for 25–30 students.</p>
+              Excel for 25–30 students — mentoring in two departments in the same semester.</p>
           </div>
 
           <div class="entry">
@@ -682,8 +721,8 @@
               <span class="entry-date">Sep – Dec 2025</span>
             </div>
             <p class="entry-tags">Teaching · Software Engineering</p>
-            <p class="entry-desc">Evaluated assignments and exams with written feedback on code and algorithms; managed
-              grading workflows to weekly deadlines.</p>
+            <p class="entry-desc">Evaluated assignments and exams for a Scheme/Racket course with written feedback on
+              code and algorithm design; ran the grading workflow to weekly deadlines.</p>
           </div>
 
           <div class="entry">
@@ -692,8 +731,9 @@
               <span class="entry-date">Dec 2023 – Aug 2024</span>
             </div>
             <p class="entry-tags">Teaching · Software Engineering</p>
-            <p class="entry-desc">Guided 50+ students in C++ and Python individually and in small groups; supported
-              Django projects through code review.</p>
+            <p class="entry-desc">Hired as a tutor after finishing Yandex Academy's backend course as a student; taught
+              50+ students C++ and Python one-on-one and in small groups, and supported their Django projects through
+              code review.</p>
           </div>
 
           <p class="also-label">Also —</p>
@@ -716,6 +756,16 @@
         <div>
 
           <div class="project">
+            <p class="project-title">GPT Fine-Tune — Self-Taught Transformers</p>
+            <span class="project-stack">Python · Machine Learning</span>
+            <p class="project-desc">In early 2023, with no course and no mentor, I learned how transformers work in about
+              three weeks and fine-tuned a GPT language model to reproduce how my friends text. The usual cloud training
+              services were closed to me where I lived, so I engineered my own compute access on an old laptop. I
+              presented the work at an AI conference, which led to the product internship at Tinkoff Bank.</p>
+            <a class="read-story" href="stories.html#gpt">Read the story →</a>
+          </div>
+
+          <div class="project">
             <p class="project-title">PIPS — 16-bit CPU &amp; Assembler</p>
             <span class="project-stack">Logisim · Python</span>
             <p class="project-desc">A microcoded 16-bit CPU built in Logisim for a computer organization course, with
@@ -725,20 +775,27 @@
           </div>
 
           <div class="project">
+            <p class="project-title">Event Planner</p>
+            <span class="project-stack">Django · Python</span>
+            <p class="project-desc">The internal event-planning application built for Watson-Forsberg and still in
+              production firm-wide: synchronized with Unanet, Procore, and Microsoft corporate systems, with budget
+              projections and Google Maps. Carries $40,000 of event budget, 50+ events, 300+ contacts, and 178
+              companies.</p>
+            <div class="project-links">
+              <a class="project-link" href="https://github.com/Shagulka/Event-Planner">View on GitHub →</a>
+              <a class="project-link" href="stories.html#event-planner">Read the story →</a>
+            </div>
+          </div>
+
+          <div class="project">
             <p class="project-title">Tarot App</p>
             <span class="project-stack">Swift · SwiftUI</span>
             <p class="project-desc">An iOS app for AI-powered tarot readings. Pick a category and spread size, draw
               cards, and get an AI-generated interpretation of the reading, designed to Apple's Human Interface
               Guidelines.</p>
-            <a class="project-link" href="https://github.com/Shagulka/Tarot-App">View on GitHub →</a>
-          </div>
-
-          <div class="project">
-            <p class="project-title">Event Planner</p>
-            <span class="project-stack">Django · Python</span>
-            <p class="project-desc">An internal event-planning application built for Watson-Forsberg, synchronized with
-              Unanet, Procore, and Microsoft corporate systems, with budget projections and Google Maps integration.</p>
-            <a class="project-link" href="https://github.com/Shagulka/Event-Planner">View on GitHub →</a>
+            <div class="project-links">
+              <a class="project-link" href="https://github.com/Shagulka/Tarot-App">View on GitHub →</a>
+            </div>
           </div>
 
           <div class="project">
@@ -759,21 +816,69 @@
 
           <div class="paper">
             <p class="paper-title">State Corporate Income Taxes and New Business Formation in the United States</p>
-            <p class="paper-meta">with B. Pilling — Grinnell College, 2026</p>
-            <p class="paper-desc">A balanced state-year panel (51 jurisdictions, 2004–2020) testing whether top marginal
-              state corporate tax rates deter new firm entry. Pooled OLS, two-way fixed-effects, and 2SLS
-              specifications in Stata; the negative cross-sectional association does not survive fixed-effects or IV
-              identification.</p>
+            <p class="paper-meta">with B. Pilling — Grinnell College, May 2026 · Stata</p>
+            <p class="paper-desc">A balanced state-year panel (51 jurisdictions, 2004–2020; 867 observations) testing
+              whether top marginal state corporate tax rates deter new firm entry. Pooled OLS, two-way fixed-effects,
+              and 2SLS specifications with state-clustered standard errors and a regional-average-rate instrument; a
+              large-state exclusion and a one-year-lead placebo for robustness. The negative cross-sectional association
+              does not survive fixed effects or IV, and the null result is reported.</p>
             <a class="project-link" href="papers/state-corporate-taxes.pdf">Read the paper (PDF) →</a>
           </div>
 
           <div class="paper">
             <p class="paper-title">Economic, Demographic, and Policy Factors in COVID-19 Mortality Across Countries</p>
-            <p class="paper-meta">with B. Pilling and J. Pada — Grinnell College, December 2025</p>
+            <p class="paper-meta">with B. Pilling and J. Pada — Grinnell College, December 2025 · R</p>
             <p class="paper-desc">A cross-national analysis of COVID-19 deaths per capita and per case across 150
-              countries. Univariable and multivariable regressions in R identify HDI as the strongest predictor of
-              deaths per capita, and population density as the strongest predictor of deaths per case.</p>
+              countries. Univariable and multivariable regressions in R with nested-model F-tests, log transformations,
+              and residual diagnostics identify HDI as the strongest predictor of deaths per capita, and population
+              density as the strongest predictor of deaths per case.</p>
             <a class="project-link" href="papers/covid19-mortality.pdf">Read the paper (PDF) →</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="leadership">
+      <div class="section-grid">
+        <h2 class="section-label">Leadership &amp; Awards</h2>
+        <div>
+
+          <div class="entry">
+            <div class="entry-head">
+              <span class="entry-title">Grin &amp; Go — Second of 11 Teams <span class="entry-org">Pioneer Weekend
+                  Entrepreneurial Contest</span></span>
+              <span class="entry-date">2025</span>
+            </div>
+            <p class="entry-tags">Commercial Strategy · Financial Modeling</p>
+            <p class="entry-desc">In 48 hours, a team of five designed Grin &amp; Go — a campus network of refrigerated
+              smart vending machines stocked with real food, open at 2 a.m. I owned the financial model and the rollout:
+              unit economics from sourced costs to a break-even at 40.4% of expected spending (roughly 650 of 1,700
+              students) and $110,000 of projected annual profit, staged in three phases so each phase funded the next.
+              Second of 11 teams, with personal recognition from Grinnell College President Anne Harris.</p>
+            <a class="read-story" href="stories.html#grin-and-go">Read the story →</a>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head">
+              <span class="entry-title">Debate Leader <span class="entry-org">Grinnell College Debate Union</span></span>
+              <span class="entry-date">Fall 2025 – Present</span>
+            </div>
+            <p class="entry-tags">Leadership · Argumentation</p>
+            <p class="entry-desc">Co-lead a student-run debate society with no faculty advisor: direct weekly meetings,
+              organize competitive travel and resources, and mentor members on argumentation and strategy.</p>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head">
+              <span class="entry-title">AI &amp; Competitive Programming <span class="entry-org">Centre for Teaching
+                  Excellence</span></span>
+              <span class="entry-date">2023</span>
+            </div>
+            <p class="entry-tags">Machine Learning · Algorithms</p>
+            <p class="entry-desc">Self-taught transformer architectures and fine-tuned a GPT model on limited hardware,
+              presenting the work at an AI conference that led to the Tinkoff internship. Algorithms training covered
+              automata, minimum spanning trees, dynamic programming, graphs, strings, and segment trees.</p>
           </div>
 
         </div>
@@ -792,18 +897,21 @@
 
           <div class="skill-row">
             <p class="skill-cat">Frameworks &amp; Tools</p>
-            <p class="skill-items">Django, React.js, SwiftUI, Unity, WebGL, Git, LaTeX, Logisim, Figma, Trello</p>
+            <p class="skill-items">Django, React.js, SwiftUI, Unity (C#), WebGL, Git, LaTeX, Logisim, Figma, Trello;
+              Unanet, Procore, Microsoft Entra</p>
           </div>
 
           <div class="skill-row">
             <p class="skill-cat">Quantitative &amp; Analytical</p>
-            <p class="skill-items">Stata, R, Python (pandas, NumPy), Excel; regression, hypothesis testing,
-              econometric analysis, panel data, instrumental variables</p>
+            <p class="skill-items">Stata, R, Python (pandas, NumPy), Excel; regression, hypothesis testing, panel
+              econometrics (fixed effects, instrumental variables, 2SLS), clustered standard errors, robustness and
+              placebo testing, unit-economics and break-even modeling</p>
           </div>
 
           <div class="skill-row">
             <p class="skill-cat">Languages</p>
-            <p class="skill-items">English (fluent), Russian (native)</p>
+            <p class="skill-items">Russian (native), English (fluent), Mandarin Chinese (beginner — coursework Fall
+              2026, study abroad Spring 2027)</p>
           </div>
 
         </div>
@@ -819,12 +927,23 @@
             <div class="entry-head">
               <span class="entry-title">Grinnell College <span class="entry-org">BA, Economics &amp; Computer
                   Science</span></span>
-              <span class="entry-date">Aug 2024 – Present</span>
+              <span class="entry-date">Aug 2024 – May 2028</span>
             </div>
-            <p class="entry-desc">GPA 3.78. Debate Leader, Grinnell College Debate Union (Fall 2025–Present). Second
-              place, Pioneer Weekend Entrepreneurial Contest. Self-taught transformer architectures and fine-tuned a
-              GPT model to imitate friends' group-chat style, presenting the work at an AI conference through the
-              Centre for Teaching Excellence.</p>
+            <p class="entry-desc">GPA 3.77; Dean's List every term after the first (Grinnell's cut is a 3.75 term GPA).
+              Coursework across Econometrics, Microeconomic Analysis, and International Economics, and Data Structures &amp;
+              Algorithms, Discrete Structures, Computer Organization &amp; Architecture, and Software Design &amp;
+              Development. Debate Leader of the Grinnell College Debate Union; second of 11 teams at the Pioneer Weekend
+              entrepreneurial contest.</p>
+          </div>
+
+          <div class="entry">
+            <div class="entry-head">
+              <span class="entry-title">IFSA — Shanghai <span class="entry-org">International Business; Mandarin
+                  Chinese</span></span>
+              <span class="entry-date">Spring 2027</span>
+            </div>
+            <p class="entry-desc">A semester abroad studying international business, after beginning Mandarin at Grinnell
+              in Fall 2026.</p>
           </div>
 
           <div class="entry">
@@ -841,7 +960,8 @@
     </section>
 
     <footer class="site-footer">
-      <p class="fineprint">© 2026 Boris Khesin</p>
+      <p class="fineprint">© 2026 Boris Khesin · <a href="stories.html">Stories</a> · <a
+          href="Boris_Khesin_CV.pdf">CV</a></p>
       <a class="back-to-top" href="#top">Back to top</a>
     </footer>
 
@@ -868,7 +988,7 @@
       heroObserver.observe(hero);
     }
 
-    var navLinks = document.querySelectorAll('.top-nav a');
+    var navLinks = document.querySelectorAll('.top-nav a[href^="#"]');
     var sections = document.querySelectorAll('section.section[id]');
     if ('IntersectionObserver' in window) {
       var observer = new IntersectionObserver(function (entries) {
